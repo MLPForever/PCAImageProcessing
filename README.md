@@ -1,5 +1,5 @@
 # PCAImageProcessing
 
-Этот проект реализует алгоритмы PCA (principal component analysis) и 2D PCA.
+Р­С‚РѕС‚ РїСЂРѕРµРєС‚ СЂРµР°Р»РёР·СѓРµС‚ Р°Р»РіРѕСЂРёС‚РјС‹ PCA (principal component analysis) Рё 2D PCA.
 
-Датасет - https://www.kaggle.com/datasets/tavarez/the-orl-database-for-training-and-testing
+Р”Р°С‚Р°СЃРµС‚ - https://www.kaggle.com/datasets/tavarez/the-orl-database-for-training-and-testing
