@@ -136,7 +136,7 @@ namespace PCAImageProcessing.Models
             ReduceEigenVectors = CreateReductionMatrixRow(EigenVectors, rIndices);
 
             ReduceSubSpace = ReduceEigenVectors * DMat;
-        }
+        }     
 
         public Mat ReconstructImage(Mat projection)
         {

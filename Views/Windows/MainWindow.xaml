@@ -31,6 +31,7 @@
                             <RowDefinition Height="100"/>
                             <RowDefinition/>
                             <RowDefinition/>
+                            <RowDefinition Height="50"/>
                         </Grid.RowDefinitions>
                         <ListBox Grid.Row="0" SelectedIndex="{Binding PCA1DSelectBitmapImageIndex, UpdateSourceTrigger=PropertyChanged}"
                                  ItemsSource="{Binding BitmapImages}">
@@ -97,6 +98,14 @@
                             <Image Source="{Binding PCA1DReconstructedImage}"
                                    Grid.Column="1" Height="200"/>
                         </Grid>
+                        <Grid Grid.Row="5">
+                            <Label Content="{Binding PCA1DMSE}"
+                                   ContentStringFormat="MSE: {0:N2}"
+                                   FontSize="15"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   FontWeight="Bold"/>
+                        </Grid>
                     </Grid>
                 </TabItem>
                 <TabItem Header="2D PCA">
@@ -107,6 +116,7 @@
                             <RowDefinition Height="100"/>
                             <RowDefinition/>
                             <RowDefinition/>
+                            <RowDefinition Height="50"/>
                         </Grid.RowDefinitions>
                         <ListBox Grid.Row="0" SelectedIndex="{Binding PCA2DSelectBitmapImageIndex, UpdateSourceTrigger=PropertyChanged}"
                                  ItemsSource="{Binding BitmapImages}">
@@ -156,6 +166,14 @@
                                    Grid.Column="1" Height="200"/>
                             <Image Source="{Binding PCA2DReconstructedImage, UpdateSourceTrigger=PropertyChanged}"
                                    Grid.Column="2" Height="200"/>
+                        </Grid>
+                        <Grid Grid.Row="5">
+                            <Label Content="{Binding PCA2DMSE}"
+                                    ContentStringFormat="MSE: {0:N2}"
+                                    FontSize="15"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontWeight="Bold"/>
                         </Grid>
                     </Grid>
                 </TabItem>

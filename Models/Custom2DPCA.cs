@@ -138,7 +138,7 @@ namespace PCAImageProcessing.Models
             }
 
             return reductionMatrix;
-        }
+        }       
 
         private Mat CreateReductionMatrixCol(Mat eigenVectors, int[] selectedIndices)
         {

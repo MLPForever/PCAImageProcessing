@@ -56,5 +56,25 @@ namespace PCAImageProcessing.Models
                 return bitmapImage;
             }
         }
+
+        public static double CalculateMSE(Mat img1, Mat img2)
+        {
+            if (img1.Size() != img2.Size())
+            {
+                return double.MaxValue;
+            }
+
+            Mat diff = new Mat();
+            img1.ConvertTo(img1, MatType.CV_8UC1);
+            img2.ConvertTo(img2, MatType.CV_8UC1);
+            diff.ConvertTo(diff, MatType.CV_8UC1);
+            Cv2.Absdiff(img1, img2, diff);
+            diff = diff.Mul(diff);
+
+            Scalar sum = Cv2.Sum(diff);
+            double mse = sum.Val0 / (img1.Rows * img1.Cols * img1.Channels());
+
+            return mse;
+        }
     }
 }

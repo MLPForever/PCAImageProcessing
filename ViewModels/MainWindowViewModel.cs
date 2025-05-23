@@ -1,6 +1,5 @@
 ﻿using BaseTemplateForWPF;
 using LiveCharts;
-using LiveCharts.Wpf;
 using OpenCvSharp;
 using PCAImageProcessing.Models;
 using System.Windows;
@@ -62,6 +61,17 @@ namespace PCAImageProcessing.ViewModels
         {
             get => _PCA1DComponentCount;
             set => Set(ref _PCA1DComponentCount, value);
+        }
+
+        #endregion
+
+        #region PCA1DMSE 
+
+        private double _PCA1DMSE;
+        public double PCA1DMSE
+        {
+            get => _PCA1DMSE;
+            set => Set(ref _PCA1DMSE, value);
         }
 
         #endregion
@@ -162,6 +172,17 @@ namespace PCAImageProcessing.ViewModels
 
         #endregion
 
+        #region PCA2DMSE 
+
+        private double _PCA2DMSE;
+        public double PCA2DMSE
+        {
+            get => _PCA2DMSE;
+            set => Set(ref _PCA2DMSE, value);
+        }
+
+        #endregion
+
         #region PCA2DSelectBitmapImageIndex 
 
         private int _PCA2DSelectBitmapImageIndex = 0;
@@ -231,6 +252,7 @@ namespace PCAImageProcessing.ViewModels
                 var r = _1dPCA.ReconstructImage(pr);
                 PCA1DReconstructedImage = ImageHelper.MatToBitmapImage(r);
                 PCA1SelectedBitmapImage = ImageHelper.MatToBitmapImage(img);
+                PCA1DMSE = ImageHelper.CalculateMSE(img.Clone(), r.Clone());
             }
         }
         private bool CanPCA1SelectImageCommandExecuted(object p) => true;
@@ -255,6 +277,7 @@ namespace PCAImageProcessing.ViewModels
                 PCA2DReconstructedImage = ImageHelper.MatToBitmapImage(r);
                 PCA2SelectedBitmapImage = ImageHelper.MatToBitmapImage(img);
                 PCA2SubSpaceImage = ImageHelper.MatToBitmapImage(pr);
+                PCA2DMSE = ImageHelper.CalculateMSE(img.Clone(), r.Clone());
             }
         }
         private bool CanPCA2SelectImageCommandExecuted(object p) => true;
@@ -316,13 +339,14 @@ namespace PCAImageProcessing.ViewModels
             Mat prI = pr.Clone();
             
             var r = _2dPCA.ReconstructImage(pr);
+            PCA2DMSE = ImageHelper.CalculateMSE(MatImages[PCA2DSelectBitmapImageIndex].Clone(), r.Clone());
             Mat rI = r.Clone();            
 
             prI = prI.Resize(new OpenCvSharp.Size(300, 300), interpolation: InterpolationFlags.Nearest);
             prI.ConvertTo(prI, MatType.CV_8UC1);
 
             PCA2SubSpaceImage = ImageHelper.MatToBitmapImage(prI);            
-            PCA2DReconstructedImage = ImageHelper.MatToBitmapImage(rI);            
+            PCA2DReconstructedImage = ImageHelper.MatToBitmapImage(rI);
         }
 
         private void PCA1DProcessRecinstruct()
@@ -331,6 +355,7 @@ namespace PCAImageProcessing.ViewModels
             var pr = _1dPCA.Project(MatImages[PCA1DSelectBitmapImageIndex]);
             var r = _1dPCA.ReconstructImage(pr);
             PCA1DReconstructedImage = ImageHelper.MatToBitmapImage(r);
+            PCA1DMSE = ImageHelper.CalculateMSE(MatImages[PCA1DSelectBitmapImageIndex].Clone(), r.Clone());
         }
 
         private void TurnToLoadMode()
